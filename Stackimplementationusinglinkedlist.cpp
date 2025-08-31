@@ -3,21 +3,21 @@ using namespace std;
 class node
 {
     public:
-    int data;
-    node* next;
-    node(int v):data(v),next(nullptr){}
+    int d;
+    node* n;
+    node(int v):d(v),n(nullptr){}
 };
 class Stack
 {
     private:
-    node* top;
+    node* t;
     public:
-    Stack():top(nullptr){}
+    Stack():t(nullptr){}
     void push(int v)
     {
       node* a = new node(v);
-      a->next = top;
-      top = a;
+      a->n = t;
+      t = a;
       cout<<v<<" pushed into the stack";
     }
     void pop()
@@ -27,9 +27,9 @@ class Stack
             cout<<"stack underflow cannot pop!";
             return;
         }
-        node* temp = top;
-        cout<<top->data<<" popped from the stack";
-        top = top->next;
+        node* temp = t;
+        cout<<t->d<<" popped from the stack";
+        t = t->n;
         delete temp;
     }
     void display()
@@ -39,11 +39,11 @@ class Stack
             cout<<"stack is empty!";
             return;
         }
-        node* temp = top;
+        node* temp = t;
         while(temp!=nullptr)
         {
-            cout<<temp->data<<" ";
-            temp = temp->next;
+            cout<<temp->d<<" ";
+            temp = temp->n;
         }
     }
     void peek()
@@ -53,11 +53,11 @@ class Stack
             cout<<"stack is empty!";
             return;
         }
-        cout<<"top element is:"<<top->data;
+        cout<<"t element is:"<<t->d;
     }
     bool isempty()
     {
-        return top==nullptr;
+        return t==nullptr;
     }
 };
 int main()

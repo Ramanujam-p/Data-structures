@@ -2,54 +2,54 @@
 using namespace std;
 struct node
 {
-    int d;
-    node* n;
-    node():d(0),n(nullptr){}
-    node(int v):d(v),n(nullptr){}
-    node(int v,node* n):d(v),n(n){}
+    int data;
+    node* next;
+    node():data(0),next(nullptr){}
+    node(int v):data(v),next(nullptr){}
+    node(int v ,node* next):data(v),next(next){}
 };
-class Merge_Two_sorted_lists
+class merge
 {
     public:
-    node* merge(node* l1 , node* l2)
+    node* mtl(node* l1 , node* l2)
     {
         node* a = new node(0);
         node* b = a;
         while(l1 && l2)
         {
-            if(l1->d > l2->d)
+            if(l1->data > l2->data)
             {
-                b->n = l2;
-                l2 = l2->n;
+                b->next = l2;
+                l2 = l2->next;
             }
             else
             {
-                b->n = l1;
-                l1 = l1->n;
+                b->next = l1;
+                l1 = l1->next;
             }
-            b = b->n;
+            b = b->next;
         }
-        b->n = l1?l1:l2;
-        node* h = a->n;
+        b->next = l1?l1:l2;
+        node* h = a->next;
         delete a;
         return h;
     }
 };
 int main()
 {
-    Merge_Two_sorted_lists m;
+    merge m;
     node* l1 = new node(1);
-    l1->n = new node(2);
-    l1->n->n = new node(4);
+    l1->next = new node(3);
+    l1->next->next = new node(4);
     node* l2 = new node(1);
-    l2->n = new node(3);
-    l2->n->n = new node(4);
-    node* r = m.merge(l1,l2);
-    while(r)
+    l2->next = new node(2);
+    l2->next->next = new node(4);
+    node* merged = m.mtl(l1,l2);
+    while(merged)
     {
-        cout<<r->d;
-        if(r->n) cout<<"->";
-        r = r->n;
+        cout<<merged->data;
+        if(merged->next) cout<<"->";
+        merged = merged->next;
     }
     return 0;
 }

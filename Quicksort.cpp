@@ -3,18 +3,20 @@
 using namespace std;
 int par(vector<int> &a, int low, int high)
 {
-    int pivot = a[high];
-    int i = low - 1;
-    for (int j = low; j <= high - 1; j++)
+    int pivot = a[low];
+    int i = low;
+    int j = high;
+    while (i < j)
     {
-        if (a[j] < pivot)
-        {
+        while (a[i] <= pivot && i <= high)
             i++;
+        while (a[j] > pivot && j >= low)
+            j--;
+        if (i < j)
             swap(a[i], a[j]);
-        }
     }
-    swap(a[i + 1], a[high]);
-    return i + 1;
+    swap(a[low], a[j]);
+    return j;
 }
 void quick_sort(vector<int> &a, int low, int high)
 {

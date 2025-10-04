@@ -4,9 +4,19 @@ using namespace std;
 void bubble_sort(vector<int> &a, int n)
 {
     for (int i = 0; i < n; i++)
+    {
+        bool s = false;
         for (int j = 0; j < n - i - 1; j++)
+        {
             if (a[j] > a[j + 1])
+            {
                 swap(a[j], a[j + 1]);
+                s = true;
+            }
+        }
+        if (!s)
+            break;
+    }
 }
 void input_array(vector<int> &a, int n)
 {

@@ -2,23 +2,23 @@
 #include <stack>
 using namespace std;
 
-class Node
+class node
 {
 public:
     int d;
-    Node *n;
-    Node(int v) : d(v), n(nullptr) {}
+    node *n;
+    node(int v) : d(v), n(nullptr) {}
 };
 
 class LL
 {
 public:
-    Node *h;
+    node *h;
     LL() : h(nullptr) {}
 
     void insF(int v)
     {
-        Node *a = new Node(v);
+        node *a = new node(v);
         a->n = h;
         h = a;
         cout << v << " inserted at front\n";
@@ -26,14 +26,14 @@ public:
 
     void insL(int v)
     {
-        Node *a = new Node(v);
+        node *a = new node(v);
         if (!h)
         {
             h = a;
             cout << v << " inserted at last\n";
             return;
         }
-        Node *t = h;
+        node *t = h;
         while (t->n)
             t = t->n;
         t->n = a;
@@ -52,7 +52,7 @@ public:
             insF(v);
             return;
         }
-        Node *a = new Node(v), *t = h;
+        node *a = new node(v), *t = h;
         int c = 1;
         while (t && c < p - 1)
         {
@@ -79,7 +79,7 @@ public:
             insF(v);
             return;
         }
-        Node *a = new Node(v), *p = nullptr, *t = h;
+        node *a = new node(v), *p = nullptr, *t = h;
         while (t && t->d != tar)
         {
             p = t;
@@ -98,7 +98,7 @@ public:
 
     void insA(int tar, int v)
     {
-        Node *a = new Node(v), *t = h;
+        node *a = new node(v), *t = h;
         while (t && t->d != tar)
             t = t->n;
         if (!t)
@@ -116,7 +116,7 @@ public:
     {
         if (!h)
             return;
-        Node *t = h;
+        node *t = h;
         h = h->n;
         delete t;
         cout << "First node deleted\n";
@@ -133,7 +133,7 @@ public:
             cout << "Last node deleted\n";
             return;
         }
-        Node *t = h;
+        node *t = h;
         while (t->n->n)
             t = t->n;
         delete t->n;
@@ -150,7 +150,7 @@ public:
             delF();
             return;
         }
-        Node *t = h;
+        node *t = h;
         while (t->n && t->n->d != v)
             t = t->n;
         if (!t->n)
@@ -158,7 +158,7 @@ public:
             cout << "Value not found\n";
             return;
         }
-        Node *tmp = t->n;
+        node *tmp = t->n;
         t->n = tmp->n;
         delete tmp;
         cout << v << " deleted\n";
@@ -173,7 +173,7 @@ public:
             delF();
             return;
         }
-        Node *t = h;
+        node *t = h;
         int c = 1;
         while (t->n && c < p - 1)
         {
@@ -185,15 +185,15 @@ public:
             cout << "Position out of bounds\n";
             return;
         }
-        Node *tmp = t->n;
+        node *tmp = t->n;
         t->n = tmp->n;
         delete tmp;
-        cout << "Node at position " << p << " deleted\n";
+        cout << "node at position " << p << " deleted\n";
     }
 
     void delA(int tar)
     {
-        Node *t = h;
+        node *t = h;
         while (t && t->d != tar)
             t = t->n;
         if (!t || !t->n)
@@ -201,10 +201,10 @@ public:
             cout << "Target not found or no node after\n";
             return;
         }
-        Node *tmp = t->n;
+        node *tmp = t->n;
         t->n = tmp->n;
         delete tmp;
-        cout << "Node after " << tar << " deleted\n";
+        cout << "node after " << tar << " deleted\n";
     }
 
     void delB(int tar)
@@ -219,7 +219,7 @@ public:
             delF();
             return;
         }
-        Node *t = h;
+        node *t = h;
         while (t->n && t->n->n && t->n->n->d != tar)
             t = t->n;
         if (!t->n || !t->n->n)
@@ -227,16 +227,16 @@ public:
             cout << "Target not found\n";
             return;
         }
-        Node *tmp = t->n;
+        node *tmp = t->n;
         t->n = tmp->n;
         delete tmp;
-        cout << "Node before " << tar << " deleted\n";
+        cout << "node before " << tar << " deleted\n";
     }
 
     void revS()
     {
-        stack<Node *> s;
-        Node *t = h;
+        stack<node *> s;
+        node *t = h;
         while (t)
         {
             s.push(t);
@@ -257,7 +257,7 @@ public:
 
     void revP()
     {
-        Node *p = nullptr, *c = h, *nxt;
+        node *p = nullptr, *c = h, *nxt;
         while (c)
         {
             nxt = c->n;
@@ -271,19 +271,19 @@ public:
 
     void sortI()
     {
-        for (Node *i = h; i; i = i->n)
-            for (Node *j = i->n; j; j = j->n)
+        for (node *i = h; i; i = i->n)
+            for (node *j = i->n; j; j = j->n)
                 if (i->d > j->d)
                     swap(i->d, j->d);
         cout << "Sorted iteratively\n";
     }
 
-    void sortR(Node *s)
+    void sortR(node *s)
     {
         if (!s || !s->n)
             return;
-        Node *m = s;
-        for (Node *t = s->n; t; t = t->n)
+        node *m = s;
+        for (node *t = s->n; t; t = t->n)
             if (t->d < m->d)
                 m = t;
         swap(s->d, m->d);
@@ -299,7 +299,7 @@ public:
     void cnt()
     {
         int c = 0;
-        Node *t = h;
+        node *t = h;
         while (t)
         {
             c++;
@@ -315,7 +315,7 @@ public:
             h = l2.h;
             return;
         }
-        Node *t = h;
+        node *t = h;
         while (t->n)
             t = t->n;
         t->n = l2.h;
@@ -329,7 +329,7 @@ public:
             cout << "List is empty\n";
             return;
         }
-        Node *t = h;
+        node *t = h;
         while (t)
         {
             cout << t->d;
@@ -436,7 +436,7 @@ int main()
             cout << "Enter value to search: ";
             cin >> v;
             {
-                Node *t = l1.h;
+                node *t = l1.h;
                 int pos = 1;
                 bool found = false;
                 while (t)

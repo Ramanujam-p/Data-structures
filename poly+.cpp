@@ -30,12 +30,13 @@ void display(node *h)
         cout << "polynomial is empty, cannot display\n";
         return;
     }
-    while (h)
+    node *t = h;
+    while (t)
     {
-        cout << h->coeff << "x^" << h->exp;
-        if (h->n)
+        cout << t->coeff << "x^" << t->exp;
+        if (t->n)
             cout << " + ";
-        h = h->n;
+        t = t->n;
     }
     cout << endl;
 }

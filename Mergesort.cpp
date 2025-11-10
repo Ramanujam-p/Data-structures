@@ -3,8 +3,8 @@
 using namespace std;
 void merge(vector<int> &a, int left, int mid, int right)
 {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+    int n1 = mid - left + 1; // why do we add 1 becuase the array is 0 indexed
+    int n2 = right - (mid + 1) + 1;
     vector<int> b(n1), c(n2);
     for (int i = 0; i < n1; i++)
         b[i] = a[left + i];

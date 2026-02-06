@@ -1,10 +1,8 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 void merge(vector<int> &a, int left, int mid, int right)
 {
-    int n1 = mid - left + 1; // why do we add 1 becuase the array is 0 indexed
-    int n2 = right - (mid + 1) + 1;
+    int n1 = mid - left + 1, n2 = right - mid;
     vector<int> b(n1), c(n2);
     for (int i = 0; i < n1; i++)
         b[i] = a[left + i];
@@ -40,12 +38,13 @@ void merge(vector<int> &a, int left, int mid, int right)
 }
 void merge_sort(vector<int> &a, int left, int right)
 {
-    if (left >= right)
-        return;
-    int mid = left + (right - left) / 2;
-    merge_sort(a, left, mid);
-    merge_sort(a, mid + 1, right);
-    merge(a, left, mid, right);
+    if (left < right)
+    {
+        int mid = left + (right - left) / 2;
+        merge_sort(a, left, mid);
+        merge_sort(a, mid + 1, right);
+        merge(a, left, mid, right);
+    }
 }
 void input_array(vector<int> &a, int n)
 {
@@ -55,21 +54,31 @@ void input_array(vector<int> &a, int n)
 }
 void print_array(vector<int> &a, int n)
 {
+    cout << "The array elements are:";
     for (int i = 0; i < n; i++)
-        cout << a[i] << " ";
+        cout << a[i]<<" ";
 }
 int main()
 {
     int n;
     cout << "enter the size of the array:";
     cin >> n;
+    if(n<=0)
+    {
+        cout<<"Invalid size of the array.";
+        return 0;
+    }
+    if(n<=1)
+    {
+        cout<<"Array is already sorted.";
+        return 0;
+    }
     vector<int> a(n);
     input_array(a, n);
-    cout << "array before sorting:";
+    cout << "\nArray before sorting:\n";
     print_array(a, n);
     merge_sort(a, 0, n - 1);
     cout << endl;
-    cout << "array after sorting:";
+    cout << "\nArray after sorting:\n";
     print_array(a, n);
-    return 0;
 }
